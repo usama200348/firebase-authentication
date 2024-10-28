@@ -6,27 +6,28 @@ import Login from './Pages/Login.jsx'
 import Register from './Pages/Register.jsx'
 import About from './Pages/About.jsx'
 import Layout from './Layout.jsx'
+import ProtectedRoutes from './Components/ProtectedRoutes.jsx'
 
 const router=createBrowserRouter([
   {
     path:'',
-    elementlement:<Layout />,
+    element:<Layout />,
     children:[
       {
         path:'',
-        elementlement:<Home />
+        element:<ProtectedRoutes component={<Home/>}/>
       },
       {
         path:'login',
-        elementlement:<Login />
+        element:<Login />
       },
       {
         path:'register',
-        elementlement:<Register />
+        element:<Register />
       },
       {
         path:'about',
-        elementlement:<About  />
+        element:<About  />
       }
     ]
   }
