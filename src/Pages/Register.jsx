@@ -1,38 +1,71 @@
-import { createUserWithEmailAndPassword } from 'firebase/auth'
-import React, { useRef } from 'react'
-import { auth } from '../config/firebase/firebaseconfig'
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+import React, { useRef } from 'react';
+import { auth, db } from '../config/firebase/firebaseconfig';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
-  const email = useRef()
-  const password = useRef()
+  const email = useRef();
+  const password = useRef();
+  const name = useRef();
+  const age = useRef();
+  const gender = useRef();
+  const navigate=useNavigate
 
-  const registerUser = (event) => {
-    event.preventDefault()
-    console.log(email.current.value);
-    console.log(password.current.value);
+  const registerUser = async (event) => {
+    event.preventDefault();
 
-    createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user)
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        console.log(errorMessage)
+    // Validate email and password
+    if (!email.current.value || !password.current.value) {
+      console.log("Please enter a valid email and password.");
+      return;
+    }
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      );
+      const user = userCredential.user;
+      console.log("User created:", user);
+
+      // Save additional information in Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        name: name.current.value,
+        age: age.current.value,
+        gender: gender.current.value,
+        email: email.current.value,
+     
       });
+      console.log("Checking");
+      
+      navigate('login/')
 
+      console.log("User information saved to Firestore.");
+    } catch (error) {
+      console.error("Error during registration:", error.message);
+    }
+  };
 
-  }
   return (
     <>
       <h1 className='text-center'>Register</h1>
       <form onSubmit={registerUser}>
-        <input type="email" placeholder='enter your email' ref={email} />
-        <input type="password" placeholder='enter your password' ref={password} />
-        <button>Register</button>
+        <input type="text" placeholder='Enter Your Name' ref={name} />
+        <input type="number" ref={age} placeholder='Enter Your Age' />
+        <select ref={gender} defaultValue="">
+          <option value="" disabled>Select Your Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+        <input type="email" placeholder='Enter your email' ref={email} />
+        <input type="password" placeholder='Enter your password' ref={password} />
+        <button type="submit">Register</button>
       </form>
     </>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
