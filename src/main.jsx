@@ -13,42 +13,21 @@ import ProtectedRoutes from './Components/ProtectedRoutes.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
+    element: <Layout/>,
     children: [
       {
-        path: '',
+        path: '/home',
         element: <ProtectedRoutes component={<Home />}/>
       },
       {
-        path: 'login',
+        path: '/login',
         element: <Login />
       },
       {
         path: 'register',
         element: <Register />
       },
-      {
-        path: 'about/*',
-        element:  <ProtectedRoutes component={<About />}/>,
-        children: [
-          {
-            path: '', 
-            element: <h1>/ route</h1>
-          },
-          {
-            path: 'nested1',
-            element: <h1>Nested one</h1>
-          },
-          {
-            path: 'nested2',
-            element: <h1>Nested two</h1>
-          },
-          {
-            path: 'nested3',
-            element: <h1>Nested three</h1>
-          },
-        ]
-      }
+     
     ]
   }
 ])

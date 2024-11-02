@@ -2,7 +2,7 @@ import './home.css'
 import React, { useEffect, useRef, useState } from 'react';
 import { collection, addDoc, getDocs, query, where, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { db, auth } from '../config/firebase/firebaseconfig';
-import './Home.css'; // Import the CSS file
+import './Home.css'; 
 
 const Home = () => {
   const todoInputRef = useRef();
@@ -27,7 +27,6 @@ const Home = () => {
     getFirestoreData();
   }, []);
 
-  // Add a new todo to Firestore
   const addTodo = async (event) => {
     event.preventDefault();
     const todoText = todoInputRef.current.value.trim();
@@ -108,7 +107,7 @@ const Home = () => {
             </li>
           ))
         ) : (
-          <h1>Loading...</h1>
+          <h1>No Data Avaliable</h1>
         )}
       </ol>
     </div>

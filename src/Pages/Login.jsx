@@ -20,7 +20,7 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log("Logged in user:", user);
-        navigate('/'); 
+        navigate('/home'); 
       })
       .catch((error) => {
         console.error("Login Error:", error.code, error.message); 
