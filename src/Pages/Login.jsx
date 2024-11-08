@@ -2,6 +2,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
 import { auth } from '../config/firebase/firebaseconfig';
 import { Link, useNavigate } from 'react-router-dom';
+import { Box, Typography, Stack } from '@mui/material';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -11,11 +12,7 @@ const Login = () => {
 
   const loginUser = (event) => {
     event.preventDefault();
-    
-    setError(null); // Reset error before login attempt
-    console.log("Email:", email);
-    console.log("Password:", password);
-     
+    setError(null);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -29,29 +26,33 @@ const Login = () => {
   };
 
   return (
-    <>
-      <h1 className='text-center'>Login</h1>
-      <form onSubmit={loginUser}>
+    <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" minHeight="100vh">
+      <Stack spacing={1.5} alignItems="center">
+        <Typography variant="h4" component="h1">Login</Typography> 
+      </Stack>
+      <Box component="form" onSubmit={loginUser} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 2 }}>
         <input 
           type="email" 
-          placeholder='Enter your email' 
+          placeholder="Enter your email" 
           value={email} 
           onChange={(e) => setEmail(e.target.value)}
           required 
+          style={{ margin: '0.5rem 0', padding: '0.5rem', width: '200px' }}
         />
         <input 
           type="password" 
-          placeholder='Enter your password' 
+          placeholder="Enter your password" 
           value={password} 
           onChange={(e) => setPassword(e.target.value)}
           required 
+          style={{ margin: '0.5rem 0', padding: '0.5rem', width: '200px' }}
         />
-        <button type="submit">Login</button>
-        <p><Link to={'register'}>Don't Have An Account? Click Here</Link></p>
-      </form> 
+        <button type="submit" style={{ padding: '0.5rem 1rem', marginTop: '1rem' }}>Login</button>
+        <p><Link to={'/register'}>Don't Have An Account? Click Here</Link></p>
+      </Box> 
 
-      {error && <p style={{ color: 'red' }}>{error}</p>} 
-    </>
+      {error && <Typography color="error" mt={2}>{error}</Typography>} 
+    </Box>
   );
 };
 

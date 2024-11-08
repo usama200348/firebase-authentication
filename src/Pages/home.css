@@ -1,13 +1,5 @@
 
-/* 
-.container {
-    max-width: 600px;
-    margin: auto;
-    text-align: center;
-    font-family: Arial, sans-serif;
-    color: #333;
-  } */
-  
+
   h2 {
     color: #4a90e2;
   }
@@ -23,7 +15,7 @@
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    width: 70%;
+    /* width: 70%; */
     font-size: 16px;
   }
   
@@ -57,7 +49,7 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     margin-bottom: 8px;
-    background-color: #f9f9f9;
+    background-color:transparent;
   }
   
   .todo-title {

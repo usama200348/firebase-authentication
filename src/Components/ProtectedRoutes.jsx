@@ -11,6 +11,7 @@ const ProtectedRoutes = ({ component }) => {
                 const uid = user.uid;
                 console.log(uid)
                 setLoading(false)
+                navigate('')
             } else {
                 navigate('/login')
             }
@@ -18,7 +19,6 @@ const ProtectedRoutes = ({ component }) => {
 
     }, [])
 
-    // use navigate
     const navigate = useNavigate()
     return (
         loading ? <h1>Loading...</h1> :  component

@@ -1,4 +1,5 @@
 import React from 'react'
+import './Nav.css'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -40,7 +41,7 @@ function ResponsiveAppBar() {
 
   const handleLogout = () => {
     signOut(auth).then(() => {
-        // alert("User Logged Out Successfully")
+        alert("User Logged Out Successfully")
         navigate('/login')
       })
       .catch((error) => {
@@ -50,8 +51,8 @@ function ResponsiveAppBar() {
   }
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
+    <AppBar >
+      <Container >
         <Toolbar disableGutters>
           <Typography
             variant="h6"
@@ -87,12 +88,12 @@ function ResponsiveAppBar() {
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: 'bottom',
-                horizontal: 'left',
+                horizontal: 'center',
               }}
               keepMounted
               transformOrigin={{
                 vertical: 'top',
-                horizontal: 'left',
+                horizontal: 'center',
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
@@ -100,7 +101,7 @@ function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
+                  <Typography display={'flex'} justifyContent={'center'} textAlign="center">
                     <Link to={`/${page.toLowerCase()}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                       {page}
                     </Link>
@@ -144,12 +145,12 @@ function ResponsiveAppBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {/* <Tooltip title="Open settings">
+            <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="User Avatar" src="/static/images/avatar/2.jpg" />
               </IconButton>
-            </Tooltip> */}
-                       <button onClick={handleLogout}>Sing Out</button>
+            </Tooltip>
+                     
 
             <Menu
               sx={{ mt: '45px' }}
@@ -174,6 +175,7 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
+            <button className='Button' onClick={handleLogout}>Sing Out</button>
         </Toolbar>
       </Container>
     </AppBar>

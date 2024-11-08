@@ -5,7 +5,7 @@ import Layout from './layout.jsx'
 import Home from './pages/Home.jsx'
 import Login from './Pages/Login.jsx'
 import Register from './Pages/Register.jsx'
-import About from './Pages/About.jsx'
+// import About from './Pages/About.jsx'
 import ProtectedRoutes from './Components/ProtectedRoutes.jsx'
 
 
@@ -13,7 +13,7 @@ import ProtectedRoutes from './Components/ProtectedRoutes.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout/>,
+    element: <Layout />,
     children: [
       {
         path: '/home',

@@ -3,6 +3,7 @@ import { doc, setDoc } from 'firebase/firestore';
 import React, { useRef } from 'react';
 import { auth, db } from '../config/firebase/firebaseconfig';
 import { useNavigate } from 'react-router-dom';
+import { Box } from '@mui/material';
 
 const Register = () => {
   const email = useRef();
@@ -40,7 +41,7 @@ const Register = () => {
       });
       console.log("Checking");
       
-      navigate('login/')
+      navigate('/login')
 
       console.log("User information saved to Firestore.");
     } catch (error) {
@@ -50,7 +51,9 @@ const Register = () => {
 
   return (
     <>
-      <h1 className='text-center'>Register</h1>
+    <Box display='flex' alignItems='center'>
+      <h1 >Register</h1>
+    </Box>
       <form onSubmit={registerUser}>
         <input type="text" placeholder='Enter Your Name' ref={name} />
         <input type="number" ref={age} placeholder='Enter Your Age' />
