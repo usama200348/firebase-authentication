@@ -107,7 +107,7 @@ const Home = () => {
             </li>
           ))
         ) : (
-          <h1>No Data Avaliable</h1>
+          <h1>No Todos</h1>
         )}
       </ol>
     </div>
